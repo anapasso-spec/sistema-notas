@@ -94,6 +94,45 @@ for (int i = 0; i < qAlunos; i++)
 
 cout << "  " << i + 1 << ". " << nomes[i] << endl;
 
+cout << "\n --------- RELATÓRIO --------- " << endl;
+
+int aprovados = 0, recuperacao = 0, reprovados = 0;
+
+for (int i = 0; i < qAlunos; i++)
+
+{
+
+cout << nomes[i] << " - Média: " << media[i] << " - " << endl;
+
+if (media[i] >= 7)
+{
+
+cout << "Aprovado " << endl;
+
+aprovados++;
+
+else if (media[i] >= 5)
+
+{
+
+cout << "Recuperação " << endl;
+
+recuperacao++;
+
+}
+
+else 
+
+cout << "Reprovado " << endl;
+
+reprovados++;
+
+}
+
+}
+
+cout << "\nResumo: " << aprovados << "aprovados, " << recuperacao << "em recuperação, " << reprovados << "reprovados " << endl;
+
     return 0;
 
 }
