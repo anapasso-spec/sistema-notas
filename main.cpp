@@ -1,138 +1,195 @@
 #include <iostream>
+
 #include <string>
+
 #include <windows.h>
+
+#include <fstream>
+
 using namespace std;
 
-
-int main() 
+int main()
 {
 
-SetConsoleOutputCP(65001);
+    SetConsoleOutputCP(65001);
 
-//Entrada - Declaração das variáveis
+    // Entrada - Declaração das variáveis
 
-string nomes[20];
+    string nomes[20];
 
-int qAlunos;
+    int qAlunos;
 
-float notas[20][5];
+    float notas[20][5];
 
-float media[20];
+    float media[20];
 
-int qDisciplinas;
+    int qDisciplinas;
 
-//Processamento
+    // Processamento
 
-cout << " --------- SISTEMA DE NOTAS v4.0 --------- " << endl;
+    // Leitura de alunos (Commit 1)
 
-do 
+    cout << " --------- SISTEMA DE NOTAS v4.0 --------- " << endl;
 
-{
+    // Notas e médias (Commit 2)
 
-cout << "Digite a quantidade de alunos ( sendo eles de 1 a 20 ): " << endl;
+    do
 
-cin >> qAlunos;
+    {
 
-} while (qAlunos < 1 || qAlunos > 20);
+        cout << "Digite a quantidade de alunos ( sendo eles de 1 a 20 ): " << endl;
 
-cin.ignore();
+        cin >> qAlunos;
 
-for (int i = 0; i < qAlunos; i++)
+    } while (qAlunos < 1 || qAlunos > 20);
 
-{
-    cout << "Digite o nome do aluno " << i + 1 << ": " << endl;
+    cin.ignore();
 
-    getline(cin, nomes[i]);
-}
+    for (int i = 0; i < qAlunos; i++)
 
-do
+    {
+        cout << "Digite o nome do aluno " << i + 1 << ": " << endl;
 
-{
+        getline(cin, nomes[i]);
+    }
 
-  cout << "\nDigite a quantidade de disciplinas ( 1 a 5 ): " << endl;
-  
-  cin >> qDisciplinas;
+    do
 
-} while (qDisciplinas < 1 || qDisciplinas > 5);
+    {
 
-cin.ignore();
+        cout << "\nDigite a quantidade de disciplinas ( 1 a 5 ): " << endl;
 
-for (int i = 0; i < qAlunos; i++)
+        cin >> qDisciplinas;
 
-{
-cout << "\nNotas de " << nomes[i] << ": " << endl;
+    } while (qDisciplinas < 1 || qDisciplinas > 5);
 
-float soma = 0;
+    // cin.ignore();
 
-for (int j = 0; j < qDisciplinas; j++)
+    for (int i = 0; i < qAlunos; i++)
 
-{
+    {
+        cout << "\nNotas de " << nomes[i] << ": " << endl;
 
-do 
+        float soma = 0;
 
-{
+        for (int j = 0; j < qDisciplinas; j++)
 
-cout << "Disciplina " << j + 1 << " ( 1 a 5 ): ";
+        {
 
-cin >> notas[i][j];
+            do
 
-} while (notas[i][j] < 0 || notas[i][j] > 10 );
+            {
 
-soma += notas[i][j];
+                cout << "Disciplina " << j + 1 << " ( 1 a 5 ): ";
 
-}
+                cin >> notas[i][j];
 
-media[i] = soma / qDisciplinas;
+            } while (notas[i][j] < 0 || notas[i][j] > 10);
 
-}
+            soma += notas[i][j];
+        }
 
-//Saída
+        media[i] = soma / qDisciplinas;
+    }
 
-cout << "\nAlunos cadastrados: " << endl;
+    // Saída
 
-for (int i = 0; i < qAlunos; i++)
+    cout << "\nAlunos cadastrados: " << endl;
 
-cout << "  " << i + 1 << ". " << nomes[i] << endl;
+    for (int i = 0; i < qAlunos; i++)
 
-cout << "\n --------- RELATÓRIO --------- " << endl;
+        cout << "  " << i + 1 << ". " << nomes[i] << endl;
 
-int aprovados = 0, recuperacao = 0, reprovados = 0;
+    // Classificação e relatório (Commit 3)
 
-for (int i = 0; i < qAlunos; i++)
+    cout << "\n --------- RELATÓRIO --------- " << endl;
 
-{
+    int aprovados = 0, recuperacao = 0, reprovados = 0;
 
-cout << nomes[i] << " - Média: " << media[i] << " - " << endl;
+    for (int i = 0; i < qAlunos; i++)
 
-if (media[i] >= 7)
-{
+    {
 
-cout << "Aprovado " << endl;
+        cout << nomes[i] << " - Média: " << media[i] << " - " << endl;
 
-aprovados++;
+        if (media[i] >= 7)
+        {
 
-else if (media[i] >= 5)
+            cout << "Aprovado " << endl;
 
-{
+            aprovados++;
+        }
 
-cout << "Recuperação " << endl;
+        else if (media[i] >= 5)
 
-recuperacao++;
+        {
 
-}
+            cout << "Recuperação " << endl;
 
-else 
+            recuperacao++;
+        }
 
-cout << "Reprovado " << endl;
+        else
 
-reprovados++;
+            cout
+                << "Reprovado " << endl;
 
-}
+        reprovados++;
+    }
 
-}
+    cout << "\nResumo: " << aprovados << " aprovados, " << recuperacao << " em recuperação, " << reprovados << " reprovados " << endl;
 
-cout << "\nResumo: " << aprovados << "aprovados, " << recuperacao << "em recuperação, " << reprovados << "reprovados " << endl;
+    // Salvar em arquivo (Commit 4)
+
+    ofstream arquivo("relatorio.txt");
+
+    if (arquivo.is_open())
+
+    {
+
+        arquivo << "=== RELATÓRIO ===" << endl;
+
+        for (int i = 0; i < qAlunos; i++)
+
+        {
+
+            arquivo << nomes[i] << " - Média: " << media[i] << " - ";
+
+            if (media[i] >= 7)
+
+            {
+
+                arquivo << "Aprovado" << endl;
+            }
+
+            else if (media[i] >= 5)
+
+            {
+
+                arquivo << "Recuperação" << endl;
+            }
+
+            else
+
+            {
+
+                arquivo << "Reprovado" << endl;
+            }
+        }
+
+        arquivo << "\nResumo: " << aprovados << " aprovados, " << recuperacao << " em recuperação, " << reprovados << " reprovados." << endl;
+
+        arquivo.close();
+
+        cout << "\nRelatório salvo em arquivo.txt" << endl;
+    }
+
+    else
+
+    {
+
+        cout << "Erro ao criar arquivo." << endl;
+    }
 
     return 0;
-
 }
