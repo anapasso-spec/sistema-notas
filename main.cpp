@@ -25,12 +25,61 @@ int main()
 
     int qDisciplinas;
 
+    int opInicial;
+
     // Processamento
 
     // Leitura de alunos (Commit 1)
 
     cout << " --------- SISTEMA DE NOTAS v4.0 --------- " << endl;
 
+    cout << " 1 - Novo relatório "  << endl;
+
+    cout << " 2 - Ver relatório salvo "  << endl;
+
+    cout << "Escolha uma opção: " << endl;
+
+    cin >> opInicial; 
+
+    // Leitura de arquivo (Commit 5)
+
+    if (opInicial == 2)
+
+    {
+
+ifstream leitura("relatorio.txt");
+
+if (leitura.is_open())
+
+{
+
+string linha;
+
+cout << "\n";
+
+while (getline(leitura, linha))
+
+{
+
+cout << linha << endl;
+
+}
+
+leitura.close();
+
+}
+
+else 
+
+{
+
+    cout << "Nenhum relatório encontrado. " << endl;
+
+}
+
+return 0;
+
+    }
     // Notas e médias (Commit 2)
 
     do
