@@ -1,4 +1,4 @@
-# 📊 Sistema de Notas v4.0
+# 📊 Sistema de Notas v4.1
 
 > **Status do Projeto:** Concluído 🚀
 
@@ -20,6 +20,8 @@ Este é um sistema robusto desenvolvido em **C++** para o gerenciamento de notas
 * **🛡️ Validação Inteligente:** Sistema blindado contra entradas inválidas (limite de 1 a 20 alunos, 1 a 5 disciplinas e notas estritamente entre 0 e 10).
 * **🧮 Processamento Automático:** Cálculo dinâmico da média de cada aluno individualmente.
 * **🌐 Suporte a Caracteres Especiais:** Configuração nativa via `SetConsoleOutputCP(65001)` para garantir a acentuação correta no terminal Windows (UTF-8).
+* **📅 Registro de Auditoria:** Relatório exportado automaticamente com carimbo de **data e hora** exatos do fechamento das notas.
+* **ℹ️ Menu Informativo:** Tela "Sobre o Sistema" integrada diretamente na interface principal do terminal.
 * **📊 Estatísticas de Fechamento:** Gera um resumo final com a contagem exata de alunos aprovados, de recuperação e reprovados.
 
 ---
@@ -30,6 +32,14 @@ O sistema classifica automaticamente o estudante com base na média final calcul
 
 | Média Final | Status | Indicador Visual |
 | :--- | :--- | :---: |
-| Média $\ge$ 7.0 | **Aprovado** |  |
+| Média $\ge$ 7.0 | **Aprovado** | 🟢 |
 | 5.0 $\le$ Média < 7.0 | **Recuperação** | 🟡 |
-| Média < 5.0 | **
+| Média < 5.0 | **Reprovado** | 🔴 |
+
+---
+
+## ℹ️ Sobre o Sistema
+
+* **Versão atual:** v4.1
+* **Desenvolvido por:** Ana Julia Ledier
+* **Turma:** LOPAL 2026 - SENAI-SP
