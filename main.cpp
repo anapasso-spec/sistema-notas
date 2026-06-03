@@ -2,14 +2,17 @@
 #include <string>
 #include <windows.h>
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 
 int main()
 {
+
     SetConsoleOutputCP(65001);
 
     string nomes[20];
+    string arquivo;
     int qAlunos = 0;
     int opcao = 0;
     float notas[20][5] = {0};
@@ -97,6 +100,10 @@ int main()
         ofstream arquivo("relatorio.txt");
         if (arquivo.is_open())
         {
+            time_t agora = time(0);
+            char *dataHora = ctime(&agora);
+            arquivo << "Data do relatorio: " << dataHora << endl;
+
             arquivo << "=== RELATÓRIO ===" << endl;
             for (int i = 0; i < qAlunos; i++)
             {
@@ -123,6 +130,7 @@ int main()
         ifstream leitura("relatorio.txt");
         if (leitura.is_open())
         {
+
             string linha;
             cout << "\nConteúdo do relatório salvo:" << endl;
             while (getline(leitura, linha))
